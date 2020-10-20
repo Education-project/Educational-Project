@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/9c3a4df84c.js" crossorigin="anonymous"></script>
+	<script
+			  src="https://code.jquery.com/jquery-3.5.1.min.js"
+			  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+			  crossorigin="anonymous">
+	</script>
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+	<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+	<script>
+		$(document).ready(function(){
+			var mySwiper = new Swiper('.swiper-container', {
+  			// Optional parameters
+  				direction: 'horizontal',
+  				loop: true,
+  				spaceBetween: 30,
+  				centeredSlides: true,
+  				autoplay: {
+  				      delay: 2500,
+  				      disableOnInteraction: false,
+  				    },
+  				pagination: {
+  				      el: '.swiper-pagination',
+  				      clickable: true,
+  				    },
+  				// Navigation arrows
+  				navigation: {
+  				  nextEl: '.swiper-button-next',
+  				  prevEl: '.swiper-button-prev',
+  				},
+			})
+
+			//var obt = { fred: { apples: 1, oranges: 2 }, alice: { lemons: 1 } };
+
+			var znoo = {
+				"ЗНО 2016": ['Пробне6', 'Основна сесія', 'Додаткова сесія', false],
+				"ЗНО 2017": ['Пробне7', 'Основна сесія', 'Додаткова сесія', false],
+				"ЗНО 2018": ['Пробне8', 'Основна сесія', 'Додаткова сесія', false],
+			};
+
+			var evii = {
+				"ЕВІ 2017": ['Основна сесія', 'Додаткова сесія', false],
+				"ЕВІ 2018": ['Основна сесія', 'Додаткова сесія', false],
+				"ЕВІ 2019": ['Основна сесія', 'Додаткова сесія', false],
+			};
+			
+			//alert(znoo['2016'][0]);
+
+			/*Some iterations
+			for(key in znoo['2016']){
+				alert(key);
+			}
+			for(element of array)
+			*/
+
+			//var zno = ["ЗНО 2016", "ЗНО 2017", "ЗНО 2018", "ЗНО 2019", "ЗНО 2020"];
+
+			//alert(znoo['alice']['lemons']);
+
+			$(".sandwich").click(function() {
+				$(".test").empty();
+   				$(".test").append('<img class="close_icon" src="close_icon.png" alt="close_icon"><h3 class="popup_menu_header pmenu_h_zno">ЗНО</h3');
+   				
+   				$(".close_icon").click(function() {
+  					$(".test").hide();
+				});
+				let z =0;
+  				for(let element in znoo){
+  					z++;
+  					$(".test").append("<div class='zno_menu_container z"+z+"'><h5>"+element+"</h5><ul class='hide'>");
+  					let sessions = znoo[element];
+  					for(let session = 0; session < sessions.length-1; session++){
+  						$(".z"+z+" ul").append("<li>"+sessions[session]+"</li>");
+  					}
+  				}
+  				$(".test").append("</ul></div>");
+  				$(".test").append("<h3 class='popup_menu_header pmenu_h_evi'>ЕВІ</h3>");
+  				let ev =0;
+  				for(let element in evii){
+  					ev++;
+  					$(".test").append("<div class='zno_menu_container ev"+ev+"'><h5>"+element+"</h5><ul class='hide'>");
+  					let sessions = evii[element];
+  					for(let session = 0; session < sessions.length-1; session++){
+  						$(".ev"+ev+" ul").append("<li>"+sessions[session]+"</li>");
+  					}
+  				}
+  				$(".test").show();
+  				visible = false;
+
+$(".zno_menu_container h5").click(function(){
+	let chosen_test = $(this).text();
+	if(chosen_test.startsWith("ЗНО")){
+		var art = znoo[chosen_test];
+	}else{var art = evii[chosen_test];}
+	
+	let element_visible = art[art.length-1];
+	//alert(znoo[chosen_test][znoo[chosen_test].length-1]);
+if ( element_visible ) {
+  $(".zno_menu_container:contains("+chosen_test+") ul").slideUp('slow',function(){
+    $(".zno_menu_container:contains("+chosen_test+") ul").addClass('hide');
+    	//znoo[chosen_test][znoo[chosen_test].length-1] = false;
+         //.slideUp('fast');
+
+  });
+} else {
+  $(".zno_menu_container:contains("+chosen_test+") ul").slideUp(0,function(){
+    $(".zno_menu_container:contains("+chosen_test+") ul").removeClass('hide')
+         .slideDown('slow');
+         //znoo[chosen_test][znoo[chosen_test].length-1] = true;
+  });
+}
+if(chosen_test.startsWith("ЗНО")){
+znoo[chosen_test][znoo[chosen_test].length-1] = ! znoo[chosen_test][znoo[chosen_test].length-1];}
+else{
+	evii[chosen_test][evii[chosen_test].length-1] = ! evii[chosen_test][evii[chosen_test].length-1];
+}
+visible = ! visible;
+});
+		});
+			
+			/*$(".zno_menu_container h5").click(function() {
+  				//$(".zno_menu_container ul").removeClass('hide');
+  				$(".zno_menu_container ul").slideUp(0,function(){
+    $(".zno_menu_container ul").removeClass('hide')
+         .slideDown('slow');
+  });
+			});*/
+			
+			var evi = ["ЕВІ 2017", "ЕВІ 2018", "ЕВІ 2019", "ЕВІ 2020"];
+			var zno = ["ЗНО 2016", "ЗНО 2017", "ЗНО 2018", "ЗНО 2019", "ЗНО 2020"];
+
+
+			// generated evi blocks
+			$("#line_evi").after("<article><header><h2 id='evi'>ЕВІ</h2></header><div class='container_evi'>");
+
+			for (i = 0; i < evi.length; i++) { 
+				$(".container_evi").append("<div class='box box1'><img class='zno_icon' src='red_test.png' alt='zno_icon'><div class='evi_button'>"+evi[i]+"</div></div>");
+   			}
+   			$("#line_evi").after("</div></article>");
+   			// generated zno blocks
+			$("#line_zno").after("<article><header><h2 id='zno' class='zno'>ЗНО</h2></header><div class='container_zno'>");
+
+			for (i = 0; i < zno.length; i++) { 
+				$(".container_zno").append("<div class='box box4'><img class='zno_icon' src='zno_icon_blue.png' alt='zno_icon'><div class='zno_button purple'>"+zno[i]+"</div></div>");
+   			}
+   			$("#line_zno").after("</div></article>");
+
+   			$(".zno_button").click(function() {
+   				$(".test").empty();
+   				$(".test").append('<img class="close_icon" src="close_icon.png" alt="close_icon">');
+   				$(".close_icon").click(function() {
+  					$(".test").hide();
+				});
+  				let chosen_year = $(this).text();
+  				let sessions = znoo[chosen_year]
+  				//alert(sessions);
+  				$(".test").append("<div class='zno_menu_container'><h5>"+chosen_year+"</h5><ul>");
+  				for(let session = 0; session < sessions.length-1; session++){
+  					$(".zno_menu_container ul").append("<li>"+sessions[session]+"</li>");
+  				}
+  				$(".test").append("</ul></div>");
+  				$(".test").show();
+			});
+
+			$(".evi_button").click(function() {
+   				$(".test").empty();
+   				$(".test").append('<img class="close_icon" src="close_icon.png" alt="close_icon">');
+   				$(".close_icon").click(function() {
+  					$(".test").hide();
+				});
+  				let chosen_year = $(this).text();
+  				let sessions = evii[chosen_year]
+  				//alert(sessions);
+  				$(".test").append("<div class='zno_menu_container'><h5>"+chosen_year+"</h5><ul>");
+  				for(let session = 0; session < sessions.length-1; session++){
+  					$(".zno_menu_container ul").append("<li>"+sessions[session]+"</li>");
+  				}
+  				$(".test").append("</ul></div>");
+  				$(".test").show();
+			});
+
+			/*$( window ).scroll(function() {
+				var elmnt = $(window);
+  				var y = elmnt.scrollTop;
+  				if(y>100){
+  					alert("Great!");
+  				}
+			});*/
+
+			window.onscroll = function() {myFunction()};
+
+
+function myFunction() {
+	var w = window.innerWidth;
+	//var h = window.innerHeight;
+	//let padding1200="20";
+  if(w>=1008){
+  	if (document.body.scrollTop > 128 || document.documentElement.scrollTop > 128) {
+     $(".fixed_menu_wrapper").addClass("fixed_menu_small");
+     $(".fixed_menu_wrapper").css({"left": "15%"});
+     if(w>=1200){
+    	$(".fixed_menu_wrapper").css({"left": "20%"});
+     }
+     $(".header_top").css({"margin-bottom": "60px"});
+   }else {
+    //$(".ts").html("ok - "+document.documentElement.scrollTop+" window width - "+w);
+     $(".fixed_menu_wrapper").removeClass("fixed_menu_small");
+     $(".header_top").css({"margin-bottom": "20px"});
+     $(".fixed_menu_wrapper").css({"left": "0"});
+   }
+  }
+  if(w>=600 && w<1008){
+  if (document.body.scrollTop > 95 || document.documentElement.scrollTop > 95) {
+    $(".fixed_menu_wrapper").addClass("fixed_menu_small");
+    $(".fixed_menu_wrapper").css({"left": "10%"});
+    $(".header_top").css({"margin-bottom": "60px"});
+   } else {
+    //$(".ts").html("ok - "+document.documentElement.scrollTop+" window width - "+w);
+    $(".fixed_menu_wrapper").removeClass("fixed_menu_small");
+    $(".header_top").css({"margin-bottom": "20px"});
+    $(".fixed_menu_wrapper").css({"left": "0"});
+   }
+}
+  //}
+  
+}
+
+  /*$("button").click(function(){
+    $("button").css({
+      "color": "white",
+      "background-color": "#98bf21",
+      "font-family": "Arial",
+      "font-size": "20px",
+      "padding": "5px"
+    });
+     $(".test").html("Hello <b>world</b>!");
+  });*/
+});
+	</script>
+	<style>
+		.test{
+			display: none;
+			position: fixed;
+			z-index: 12;
+			right: 0;
+			width: 80vw;
+		 	height: 100vh;
+		 	border: 2px solid black;
+		 	background: rgba(60, 179, 113, 0.8);}
+		body{
+			background-color: #f3f3f3;
+			margin: 0;
+			padding: 0 20%;
+		}
+		.container_evi, .container_zno{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			align-items: center;
+			/*background-color: #d3d3d3;*/
+			/*height: 750px;*/
+			flex-wrap: wrap;
+		}
+		
+		.box{
+			width: 150px;
+			/*height: 200px;*/
+			flex-basis: 200px;
+			/*flex-grow: 1;*/
+			/*background-color: green;*/
+			margin-bottom: 2em;
+		}
+		.box1{
+			/*background-color: green;*/
+			/*background-color: rgba(0,85,0,0.1);*/
+			/*border-radius: 40px 0;*/
+			/*align-self: flex-end;*/
+			/*flex-grow: 2;*/
+		}
+		.box2{
+			background-color: yellow;
+		}
+		.box3{
+			background-color: red;
+		}
+		.box4{
+			/*background-color: brown;*/
+		}
+		.zno_button, .evi_button{
+			background-color: white;
+			padding: 8px;
+			border: 1px solid black;
+			border-radius: 3px;
+			color: #00AFAD;
+			width: 110px;
+			margin: 10px auto;
+			text-align: center;
+			font-weight: bold;
+			transition: .4s;
+		}
+		.purple{
+			color:#e25f5f;
+		}
+		.zno_button:hover, .evi_button:hover{
+			/*color: white;*/
+			background-color: #000000;
+			border: 1px solid white;
+		}
+		.zno_icon{
+			display: block;
+			margin: 10px auto 0px;
+			width: 150px;
+			height: 150px;
+		}
+		.header_top{
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			flex-wrap: wrap;
+			justify-content: space-around;
+			background-color: #ffffff;
+			margin-bottom: 20px;
+		}
+		.header_text{
+			font-family: Georgia, sans-serif;
+			font-size: 2em;
+			color: #10ACB7;
+			/*float: none;*/
+			/*width: 30%;*/
+		}
+		.header_icon1{
+			width: 160px;
+			height: 128px;
+		}
+		.header_icon2{
+			width: 117px;
+			height: 128px;
+		}
+		.slider_container{
+			margin-bottom: 3em;
+		}
+		.slider_img{
+			width: 90%;
+			margin-left: 5%;
+		}
+		.fab{color: maroon; font-size: 30px;}
+		h2{text-align: center; color: #0B727A; font-size: 3em;}
+		h2.zno{
+			color: #e25f5f;
+		}
+		html{
+  			scroll-behavior: smooth;
+		}
+		.fixed_menu_wrapper{
+			/*position: fixed;
+			background-color: rgba(0,0,0,0.05);
+			top: 20px;
+			right: 20px;*/
+			background: white;
+			text-align: right;
+			display: inline-block;
+			position: relative;
+			top: -20px;
+			right: 0;
+			border-radius: 0 0 60px 60px;
+		}
+		.fixed_menu_list{
+			list-style-type: circle;
+		}
+		.fixed_menu_item{
+			color: #00AFAD;
+			font-weight: bold;
+			font-size: 1em;
+			display: inline-block;
+			margin-right: 20px;
+		}
+		.fixed_menu_item a{
+			color: #00AFAD;
+			text-decoration: none;
+		}
+		.fixed_menu_item a:hover{
+			color: #046C6C;
+		}
+		/* option for a horizontal line, not fully adaptive*/
+		/*.gray_line{
+			height: 7px;
+			width: 100vw;
+			position: relative;
+			right: 40%;
+			background-color: #aaa8a8;
+		}*/
+		.sandwich{
+			display: none;
+		}
+		.close_icon{
+			width: 20px;
+			height: 20px;
+			float: right;
+			margin: 10px;
+		}
+		.sandwich, .close_icon{cursor: pointer;}
+		.block_line{
+			border-bottom: 7px solid #aaa8a8;
+			margin-left: -33%;
+			margin-right: -33%;
+		}
+		footer{margin: 15px 0;}
+
+
+		.swiper-container {
+      width: 100%;
+      height: 300px;
+    }
+
+    .swiper-slide {
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+
+
+		@media only screen and (max-width: 1200px){
+			body{
+				padding: 0 15%;
+			}
+			.block_line{
+			margin-left: -21.4%;
+			margin-right: -21.4%;
+			}
+		}
+		@media only screen and (max-width: 1008px){
+			body{
+				padding: 0 10%;
+			}
+			.header_icon1{
+				width: 120px;
+				height: 95px;
+			}
+			.header_icon2{
+				width: 86px;
+				height: 95px;
+			}
+			.header_text{
+				font-size: 1.7em;
+			}
+			.block_line{
+			margin-left: -12.5%;
+			margin-right: -12.5%;
+			}
+			.swiper-container {
+				height: 200px;
+    		}
+    		.fixed_menu_wrapper{
+    			background: white;
+text-align: right;
+display: inline-block;
+position: relative;
+top: -20px;
+right: 0;
+border-radius: 0 0 60px 60px;
+    		}
+    		.fixed_menu_item{
+    		display: inline-block;
+			margin-right: 20px;
+    		}
+		}
+		@media only screen and (max-width: 600px){
+			body{
+				padding: 0 5%;
+			}
+			.header_top{
+			}
+			.header_icon1{
+				/*margin-right: 200px;*/
+				flex-shrink: 0;
+				/*margin: 0 auto;*/
+				margin-left: 27%;
+			}
+			.header_icon2{
+				order: -1;
+				flex-shrink: 0;
+			}
+			.box{
+				border: none;
+				margin-bottom: 0.5em;
+				flex-basis: 240px;
+				width: 100px;
+				flex-shrink: 0;
+			}
+			.zno_icon{
+				display: none !important;
+			}
+			.zno_button, .evi_button{
+				border: 1px solid black;
+				width: 210px;
+			}
+			.zno_button:hover, .evi_button:hover{
+				border: 1px solid #aaa8a8;
+			}
+			.header_icon2{display: none;}
+			.sandwich{
+				display: block !important;
+				width: 30px;
+				height: 30px;
+				/*margin-right: 15px;*/
+			}
+			.block_line{
+			margin-left: -5.5%;
+			margin-right: -5.5%;
+			border-bottom: 4px solid #aaa8a8;
+			}
+			.fixed_menu_wrapper{
+				display: none;
+			}
+			.box1, .box4{background: none;}
+			body{background-image: url('bg.jpg');}
+		}
+		.zno_menu_container{position: relative; color: white; margin: 2% 20%;}
+		.hide{position: absolute;top: -9999px;left: -9999px;}
+		.social_links{
+			display: flex;
+			justify-content: center;
+		}
+		.social_icon{
+			margin: 5px;
+		}
+		.social_text{
+			font-style: italic;
+			color: #00afad;
+			text-align: center;
+		}
+		.arrow_top{
+			position: fixed;
+			right: 20px;
+			bottom: 20px;
+			width: 35px;
+			height: 35px;
+			padding: 5px;
+			background: maroon;
+			opacity: 0.6;
+			border-radius: 75% 75% 5% 5%;
+			transition: 1s;
+		}
+		.arrow_top a{color: white; text-decoration: none;}
+		.arrow_top:hover{opacity: 0.8;}
+		/*.ts{position: fixed; width: 100px; height: 100px; background: green; top: 0; left: 0;}*/
+		.fixed_menu_small{
+			position: fixed;
+			top: 0px;
+			left: 10%;
+			text-align: left;
+			box-sizing: border-box;
+			width: 233px;
+			border: 1px solid #00afad;
+			border-radius: 0 0 60px 60px;
+			z-index: 11;
+			background: rgba(255,255,255,0.9);
+		}
+		.popup_menu_header{margin-left: 10%;}
+		.pmenu_h_evi{color: #0B727A;}
+		.pmenu_h_zno{color: #e25f5f;}
+		a:hover{text-decoration: none;}
+	</style>
+</head>
+<body>
+	<!--<button>Check</button>
+	<div class="ts"></div> output info about scroll top and screen width-->
+	<div class="test">
+		<img class="close_icon" src="close_icon.png" alt="close_icon">
+		<!--<div class="zno_menu_container"><h5>ЗНО 2020</h5>
+			<ul class="hide">
+		 		<li>Пробне</li>
+		 		<li>Основна1</li>
+		 		<li>Основна2</li>
+			</ul>
+		</div>-->
+		
+	</div>
+	<header>
+		<div class="header_top" id="go_up">
+			<img src="header_icon1.png" alt="" class="header_icon1">
+			<img src="swblue.jpg" alt="" class="sandwich"><!--hamburger.png-->
+			<h1 class="header_text" style="text-align: center;">Онлайн ЕВІ та ЗНО <br>з англійської мови</h1>
+			<img src="header_icon2.png" alt="" class="header_icon2">
+		</div>
+		<nav>
+			<div class="fixed_menu_wrapper">
+				<ul class="fixed_menu_list">
+					<li class="fixed_menu_item"><a href="#go_up">Головна</a></li>
+					<li class="fixed_menu_item"><a href="#evi">ЕВІ</a></li>
+					<li class="fixed_menu_item"><a href="#zno">ЗНО</a></li>
+				<ul>
+			</div>
+		</nav>
+		<!-- Old slider
+		<div class="slider_container">
+			<picture>
+				<source srcset="slider_sample.png">
+  				<img src="slider_sample.png" class="slider_img" alt="Flowers">
+			</picture>
+		</div>-->
+
+
+		<div class="swiper-container">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide"><img src="zno_img1.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="zno_img2.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="zno_img3.jpg" alt=""></div>
+    </div>
+    <div class="swiper-pagination"></div>
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+</div>
+
+
+	</header>
+	<main>
+		<!-- option for a horizontal line
+			<hr class="gray_line">
+		 -->
+		<div class="block_line" id="line_evi"></div>
+
+		<!--<article>
+		<header><h2 id="evi">ЕВІ</h2></header>
+		<div class="container_evi">
+		<div class="box box1">
+			<img class="zno_icon" src="red_test.png" alt=""><div class="zno_button">ЕВІ 2017</div>
+		</div>
+			<div class="box box2"><img class="zno_icon" src="red_test.png" alt=""><div class="zno_button" >ЕВІ 2017</div>
+		</div>
+		<div class="box box3"><img class="zno_icon" src="red_test.png" alt=""><div class="zno_button">ЕВІ 2017</div></div>
+		<div class="box box4"><img class="zno_icon" src="red_test.png" alt=""><div class="zno_button">ЕВІ 2017</div></div>
+		<div class="box box4"><img class="zno_icon" src="red_test.png" alt=""><div class="zno_button">ЕВІ 2017</div></div>
+		</div>
+		</article>-->
+
+		<div class="block_line" id="line_zno"></div>
+
+		<!--<article>
+		<header><h2 id="zno" class="zno">ЗНО</h2></header>
+		<div class="mycontainer">
+		<div class="box box1"><img class="zno_icon" src="zno_icon_blue.png" alt=""><div class="zno_button purple">ЗНО 2017</div></div>
+		<div class="box box4"><img class="zno_icon" src="zno_icon_blue.png" alt=""><div class="zno_button purple">ЗНО 2017</div></div>
+		<div class="box box4"><img class="zno_icon" src="zno_icon_blue.png" alt=""><div class="zno_button purple">ЗНО 2017</div></div>
+		<div class="box box4"><img class="zno_icon" src="zno_icon_blue.png" alt=""><div class="zno_button purple">ЗНО 2017</div></div>
+		<div class="box box4"><img class="zno_icon" src="zno_icon_blue.png" alt=""><div class="zno_button purple">ЗНО 2017</div></div>
+		<div class="box box4"><img class="zno_icon" src="zno_icon_blue.png" alt=""><div class="zno_button purple">ЗНО 2017</div></div>
+					</div>
+		</article>-->
+		<div class="block_line"></div>
+	</main>
+	<footer>
+		<!--<div class="container">
+			<div class="row">
+  			<div class="col-8">
+  				<form action="#">
+  					<div class="container">
+						<div class="row">
+  							<div class="col-6">
+  								<input type="text">
+  								<input type="text">
+  								<input type="text">
+  							</div>
+  							<div class="col-6">
+  								<textarea name="" id="" cols="20" rows="5"></textarea>
+  								<input type="submit" value="Надіслати">
+  							</div>
+  						</div>
+  					</div>
+  				</form>-->
+  				
+  			<!--</div>
+  			<div class="col-4">-->
+  				<p class="social_text">Join us!</p>
+  				<div class="social_links">
+  					<i class="social_icon fab fa-facebook-square"></i>
+					<i class="social_icon fab fa-instagram-square"></i>
+					<i class="social_icon fab fa-youtube-square"></i>
+  				</div>
+  				
+				<div class="footer_nav">
+					<a href="#main">Головна</a>
+  					<a href="#zno">ЗНО</a>
+  					<a href="#evi">ЕВІ</a>
+				</div>
+				
+			<!--</div>
+			</div>
+		</div>-->
+	</footer>
+	<div class="arrow_top"><a href="#go_up">Top</a></div>
+</body>
+</html>
