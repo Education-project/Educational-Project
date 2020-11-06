@@ -33,14 +33,15 @@
     }
 
     var container = $(this);
-
+    console.log(container);
     var attributes = $.extend({}, $.fn[pluginName].defaults, options);
+    //console.log(attributes);
 
     var pagination = {
 
       initialize: function() {
         var self = this;
-
+        console.log(self);
         // Cache attributes of current instance
         if (!container.data('pagination')) {
           container.data('pagination', {});
@@ -75,6 +76,7 @@
           self.isDynamicTotalNumber = self.isAsync && attributes.totalNumberLocator;
 
           var el = self.render(true);
+          //console.log(el)
 
           // Add extra className to the pagination element
             if (attributes.className) {
@@ -85,6 +87,8 @@
 
           // Append/prepend pagination element to the container
           container[attributes.position === 'bottom' ? 'append' : 'prepend'](el);
+          //container['prepend']("<h2>Tool</h2>");
+          //$('#pgcont').prepend(el);
 
           // Bind events
           self.observer();
@@ -170,11 +174,11 @@
         }
 
         if (rangeStart <= 3) {
-          for (i = 1; i < rangeStart; i++) {
+          for (i = 2; i < rangeStart; i++) {
             if (i == currentPage) {
-              html += '<li class="' + classPrefix + '-page J-paginationjs-page ' + activeClassName + '" data-num="' + i + '"><a>' + (i-1) + '<\/a><\/li>';
+              html += '<li class="' + classPrefix + '-page J-paginationjs-page ' + activeClassName + '" data-num="' + i + '"><a>Task ' + (i-1) + '<\/a><\/li>';
             } else {
-              html += '<li class="' + classPrefix + '-page J-paginationjs-page" data-num="' + i + '"><a href="' + pageLink + '">' + (i-1) + '<\/a><\/li>';
+              html += '<li class="' + classPrefix + '-page J-paginationjs-page" data-num="' + i + '"><a href="' + pageLink + '">Task ' + (i-1) + '<\/a><\/li>';
             }
           }
         } else {
@@ -189,16 +193,16 @@
             html += '';
           }else{
           if (i == currentPage) {
-            html += '<li class="' + classPrefix + '-page J-paginationjs-page ' + activeClassName + '" data-num="' + i + '"><a>' + (i-1) + '<\/a><\/li>';
+            html += '<li class="' + classPrefix + '-page J-paginationjs-page ' + activeClassName + '" data-num="' + i + '"><a>Task ' + (i-1) + '<\/a><\/li>';
           } else {
-            html += '<li class="' + classPrefix + '-page J-paginationjs-page" data-num="' + i + '"><a href="' + pageLink + '">' + (i-1) + '<\/a><\/li>';
+            html += '<li class="' + classPrefix + '-page J-paginationjs-page" data-num="' + i + '"><a href="' + pageLink + '">Task ' + (i-1) + '<\/a><\/li>';
           }
          }
         }
 
         if (rangeEnd >= totalPage - 2) {
           for (i = rangeEnd + 1; i <= totalPage; i++) {
-            html += '<li class="' + classPrefix + '-page J-paginationjs-page" data-num="' + i + '"><a href="' + pageLink + '">' + i + '<\/a><\/li>';
+            html += '<li class="' + classPrefix + '-page J-paginationjs-page" data-num="' + i + '"><a href="' + pageLink + '">Task ' + (i-1) + '<\/a><\/li>';
           }
         } else {
           html += '<li class="' + classPrefix + '-ellipsis ' + disableClassName + '"><a>' + ellipsisText + '<\/a><\/li>';
@@ -676,8 +680,9 @@
 
       observer: function() {
         var self = this;
+       // console.log(self);
         var el = self.model.el;
-
+       // console.log(el);
         // Go to specified page number
         container.on(eventPrefix + 'go', function(event, pageNumber, done) {
           pageNumber = parseInt($.trim(pageNumber));
@@ -835,6 +840,7 @@
       if ($.isNumeric(options)) {
         // eg: container.pagination(5)
         container.trigger.call(this, eventPrefix + 'go', options, arguments[1]);
+        //console.log(this);
         return this;
       } else if (typeof options === 'string') {
         var args = Array.prototype.slice.apply(arguments);
@@ -947,7 +953,7 @@
     goButtonText: 'Go',
 
     // Additional className for Pagination element
-    //className: '',
+    //className: 'xx',
 
     classPrefix: 'paginationjs',
 
